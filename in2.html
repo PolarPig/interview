@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 0;
+            width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <label>宽
+        <input id="height" type="number">
+    </label>
+    <label>高
+        <input id="width" type="number">
+    </label>
+    <label>高
+        <input id="create" type="button" value="create">
+    </label>
+
+    <br>
+    <div id="box"></div>
+    <script>
+        window.onload = function () {
+
+            let height = document.querySelector('#height'),
+                width = document.querySelector('#width'),
+                box = document.querySelector('#box'),
+                create = document.querySelector('#create'),
+                toggle = false,
+                blue = false;
+
+
+            function ev(name, event, fn) {
+                name.addEventListener(event, fn);
+            }
+
+            ev(create, 'click', function () {
+                box.style.height = height.value + 'px';
+                box.style.width = width.value + 'px';
+                box.style.border = 'thin solid #333';
+            })
+
+            function backColor() {
+                if (toggle) {
+                    box.style.backgroundColor = '#fff';
+                } else {
+                    box.style.backgroundColor = 'red';
+                }
+
+                toggle = !toggle;
+            }
+
+            ev(box, 'mouseenter', backColor)
+
+            ev(box, 'mouseleave', backColor)
+
+            ev(box, 'click', function () {
+
+                if (blue) {
+                    box.style.backgroundColor = '#fff';
+                    ev(box, 'mouseenter', backColor)
+                    ev(box, 'mouseleave', backColor)
+                } else {
+                    box.style.backgroundColor = 'blue';
+                    box.removeEventListener('mouseenter', backColor);
+                    box.removeEventListener('mouseleave', backColor);
+                }
+
+                blue = !blue;
+            })
+        }
+
+    </script>
+</body>
+
+</html>

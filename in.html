@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label>
+        上限
+        <input id="total" type="number" value="188" max="">
+    </label>
+    <label>
+        价格
+        <input id="prices" type="text" value="">
+    </label>
+    <label>
+        合计
+        <input id="sum" type="button" value="search">
+    </label>
+    <script>
+        let total = document.querySelector('#total'),
+            prices = document.querySelector('#prices'),
+            sum = document.querySelector('#sum');
+        let totalPrice = Number(total.value);
+
+        sum.addEventListener('click', () => {
+            console.log(reArr(prices.value).reduce(getSum));
+        });
+
+        function reArr(prices) {
+
+            let priceArr = [];
+
+            prices.split(' ').forEach(ele => {
+                priceArr.push(Number(ele));
+            });
+
+            priceArr.sort(function (a, b) {
+                return a - b;
+            });
+
+            return priceArr;
+
+        }
+
+        function getSum(total, num) {
+            if (total + num > totalPrice) {
+                return total;
+            } else {
+                return total + num;
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
